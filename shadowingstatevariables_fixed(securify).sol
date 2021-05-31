@@ -1,4 +1,4 @@
-pragma solidity 0.5.12;
+pragma solidity ^0.5.12;
 
 //We fix the problem by eliminating the declaration which overrides the prefered hardcap.
 
