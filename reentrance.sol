@@ -1,4 +1,4 @@
-pragma solidity >=0.4.0 <0.7.0;
+pragma solidity ^0.5.12;
 
 // THIS CONTRACT CONTAINS A BUG - DO NOT USE
 contract Fund {

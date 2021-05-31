@@ -1,4 +1,4 @@
-pragma solidity >=0.4.11 <0.7.0;
+pragma solidity ^0.5.12;
 
 contract Fund {
     /// Mapping of ether shares of the contract.
