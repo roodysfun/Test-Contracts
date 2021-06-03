@@ -10,21 +10,21 @@ contract Relayer {
 
     mapping (uint => Tx) transactions;
 
-    function relay(Target target, bytes calldata _data) external returns(bool) {
+    function relay(Target target, bytes calldata _data, uint _gasLimit) external {
         // replay protection; do not call the same transaction twice
         require(!transactions[transactionId].executed, 'same transaction twice');
         transactions[transactionId].data = _data;
         transactions[transactionId].executed = true;
         transactionId += 1;
-
-        (bool success, ) = address(target).call(abi.encodeWithSignature("execute(bytes)", _data));
-        return success;
+        (bool success,) = address(target).call(abi.encodeWithSignature("execute(bytes)", _data, _gasLimit));
+        require(success, "Call relay failed");
     }
 }
 
 // Contract called by Relayer
 contract Target {
-    function execute(bytes calldata _data) external {
+    function execute(bytes calldata _data, uint _gasLimit) external {
+        require(gasleft() >= _gasLimit, 'not enough gas');
         // Execute contract code
     }
 }
