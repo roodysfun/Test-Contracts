@@ -23,7 +23,5 @@ contract Presale is Tokensale {
     constructor() public {
         hardcap = 1000 ether;
     }
-    // function Presale() Tokensale() {
-    //     hardcap = 1000 ether; //We set the hardcap from the constructor for the Tokensale to be 1000 instead of 10000
-    // }
+
 }

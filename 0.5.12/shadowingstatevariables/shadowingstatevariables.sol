@@ -13,7 +13,6 @@ contract Tokensale {
 
 contract Presale is Tokensale {
     uint hardcap = 1000 ether;
-
     //function Presale() Tokensale() {}
     constructor() public {}
 }

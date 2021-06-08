@@ -16,10 +16,8 @@ contract TimeLock {
     function withdraw() external {
         require(balances[msg.sender] > 0, "Insufficient funds");
         require(block.timestamp > lockTime[msg.sender], "Lock time not expired");
-
         uint amount = balances[msg.sender];
         balances[msg.sender] = 0;
-
         (bool sent, ) = msg.sender.call.value(amount)("");
         require(sent, "Failed to send Ether");
     }

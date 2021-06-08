@@ -1,10 +1,9 @@
 pragma solidity ^0.5.12;
 
-
 contract KingOfEther {
     address public king = msg.sender;
     uint public balance = 0;
-
+    
     mapping(address => uint) public balances;
 
 
@@ -17,12 +16,15 @@ contract KingOfEther {
         king = msg.sender;
     }
 
-    function withdraw(uint amount) public {     
-        require(balances[msg.sender] >= amount);
-        balances[msg.sender] -= amount;
-        msg.sender.transfer(amount);    
+    function withdraw() external {
+        require(msg.sender != king, "Current king cannot withdraw");
 
+        uint amount = balances[msg.sender];
+        balances[msg.sender] = 0;
+
+        (bool sent, ) = msg.sender.call.value(amount)("");
+        require(sent, "Failed to send Ether");
     }
-
 }
+
 

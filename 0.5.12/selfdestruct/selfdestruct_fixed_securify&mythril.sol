@@ -7,10 +7,8 @@ contract EtherGame {
 
     function deposit() external payable {
         require(msg.value == 1 ether, "You can only send 1 Ether");
-
         balance += msg.value;
         require(balance <= targetAmount, "Game is over");
-
         if (balance >= targetAmount) {
            winner = msg.sender;
         }
@@ -19,7 +17,6 @@ contract EtherGame {
 
     function claimReward() external {
         require(msg.sender == winner, "Not winner");
-
         (bool sent, ) = msg.sender.call.value(address(this).balance)("");
         require(sent, "Failed to send Ether");
     }

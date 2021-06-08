@@ -1,7 +1,5 @@
 pragma solidity ^0.5.12;
 
-
-
 contract KingOfEther {
     address public king;
     uint public balance;

@@ -16,7 +16,6 @@ contract Relayer {
         transactions[transactionId].data = _data;
         transactions[transactionId].executed = true;
         transactionId += 1;
-
         (bool success, ) = address(target).call(abi.encodeWithSignature("execute(bytes)", _data));
         return success;
     }

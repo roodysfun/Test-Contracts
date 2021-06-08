@@ -1,7 +1,5 @@
 pragma solidity ^0.5.12;
 
-
-
 contract KingOfEther {
     address public king;
     uint public balance;
@@ -9,7 +7,6 @@ contract KingOfEther {
 
     function claimThrone() external payable {
         require(msg.value > balance, "Need to pay more to become the king");
-
 
 		balances[king] += balance;
 

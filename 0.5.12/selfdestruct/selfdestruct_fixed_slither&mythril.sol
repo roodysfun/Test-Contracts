@@ -1,23 +1,20 @@
 pragma solidity ^0.5.12;
 
 contract EtherGame {
-    uint public targetAmount = 7 ether;
+    uint public constant TARGET_AMOUNT = 7 ether;
     address public winner;
 
-    function deposit() public payable {
+    function deposit() external payable {
         require(msg.value == 1 ether, "You can only send 1 Ether");
-
         uint balance = address(this).balance;
-        require(balance <= targetAmount, "Game is over");
-
-        if (balance == targetAmount) {
+        require(balance <= TARGET_AMOUNT, "Game is over");
+        if (balance >= TARGET_AMOUNT) {
             winner = msg.sender;
         }
     }
 
-    function claimReward() public {
+    function claimReward() external {
         require(msg.sender == winner, "Not winner");
-
         (bool sent, ) = msg.sender.call.value(address(this).balance)("");
         require(sent, "Failed to send Ether");
     }
