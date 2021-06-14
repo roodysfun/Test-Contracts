@@ -6,6 +6,7 @@ contract EtherGame {
 
     function deposit() public payable {
         require(msg.value == 1 ether);
+	balance += msg.value;
         uint balance = address(this).balance;
         require(balance <= targetAmount);
         if (balance == targetAmount) {
@@ -19,3 +20,4 @@ contract EtherGame {
         require(msg.sender.call.value(address(this).balance)());
     }
 }
+
